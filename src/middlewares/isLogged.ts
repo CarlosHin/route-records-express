@@ -14,6 +14,7 @@ export const isLogged  = (req: Request, res:Response, next:NextFunction) => {
         if (!decodedToken) {
             return res.status(401).json({ error: 'token invalid' })
         }
+        res.locals.decodedToken = decodedToken; 
         return next();
     }catch(error){
         if (error instanceof Error) return res.status(500).send(error.message);

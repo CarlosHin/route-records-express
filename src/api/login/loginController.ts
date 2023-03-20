@@ -21,7 +21,7 @@ export const loginController = {
         if (!user) throw new UserNotFound("Invalid username");
         
         const passwordCorrect = await bcrypt.compare(password, user.passwordHash)
-        if (!(user && passwordCorrect)) 
+        if (!passwordCorrect) 
             throw new UserNotFound("Invalid password");
 
         const userForToken = {
