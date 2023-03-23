@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { User } from "../../models/userModel";
+import config from "../../config";
 
 export class UserNotFound extends Error {
   status: number;
@@ -27,7 +28,7 @@ export const loginController = {
         id: user._id,
       };
 
-      const token = jwt.sign(userForToken, process.env.SECRET!);
+      const token = jwt.sign(userForToken, config.secret!);
       return { token, username: user.username, name: user.name };
     } catch (error) {
       if (error instanceof Error)

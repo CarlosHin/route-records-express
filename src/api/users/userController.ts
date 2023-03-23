@@ -12,7 +12,7 @@ export const userController = {
   }) {
     try {
       const findUser = await User.find({ username: username });
-      if (findUser) throw new Error(`Username ${username} Already exist`);
+      if (findUser.length > 0) throw new Error(`Username ${username} Already exist`);
 
       const user = User.build({ username, name, passwordHash });
       await user.save();

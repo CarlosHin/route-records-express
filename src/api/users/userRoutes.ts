@@ -9,8 +9,8 @@ router.get("/", async (req: Request, res: Response) => {
     const users = await userController.getAll();
     return res.status(200).send(users);
   } catch (error) {
-    if (error instanceof Error) return res.status(500).send(error.message);
-    return res.status(500).send("Unknown error");
+    if (error instanceof Error) return res.status(400).send(error.message);
+    return res.status(400).send("Unknown error");
   }
 });
 
@@ -23,8 +23,8 @@ router.post("/", async (req: Request, res: Response) => {
     await userController.create({ name, username, passwordHash });
     return res.status(200).send(`User ${name} created`);
   } catch (error) {
-    if (error instanceof Error) return res.status(500).send(error.message);
-    return res.status(500).send("Unknown error");
+    if (error instanceof Error) return res.status(400).send(error.message);
+    return res.status(400).send("Unknown error");
   }
 });
 

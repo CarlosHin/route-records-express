@@ -12,9 +12,5 @@ export default async ({ app }: { app: express.Application }) => {
   app.use("/api/login", loginRouter);
   app.use("/api/private/routes", isLogged, routesRouter);
   app.use(cors());
-
-  // ...Más middlewares
-
-  // Devuelve la aplicación express
   return app;
 };

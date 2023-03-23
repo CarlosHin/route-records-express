@@ -26,10 +26,10 @@ export const routesController = {
     }
   },
 
-  async delete(routeId: ObjectId) {
+  async delete(routeId: ObjectId, userId:ObjectId) {
     try {
-      const findByIdAndRemoveResponse = await Route.findByIdAndRemove(routeId);
-      if (!findByIdAndRemoveResponse) throw new Error("Route not Found");
+      const deleteOneResponse = await Route.deleteOne({_id:routeId, _user_id:userId});
+      if (deleteOneResponse.deletedCount === 0) throw new Error("Route not Found");
     } catch (error) {
       if (error instanceof Error)
         throw new Error("Error deleting route: " + error.message);
