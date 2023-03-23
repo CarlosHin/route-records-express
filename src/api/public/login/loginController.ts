@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { User } from "../../models/userModel";
-import config from "../../config";
+import { User } from "../../../models/userModel";
+import config from "../../../config";
 
 export class UserNotFound extends Error {
   status: number;
