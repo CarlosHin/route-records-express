@@ -27,7 +27,7 @@ export const userController = {
   async getAll() {
     try {
       const users = await User.find({});
-      return users;
+      return users.map(user => ({name:user.name}));
     } catch (error) {
       if (error instanceof Error)
         throw new Error("Error creating user: " + error.message);
