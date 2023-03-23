@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { Route } from "./routesModel";
+import { Route } from "../../../models/routesModel";
 import { routesController } from "./routesController";
 const router = express.Router();
 
@@ -15,13 +15,13 @@ router.get("/", async (req: Request, res: Response) => {
 
 router.post("/", async (req: Request, res: Response) => {
   try {
-    const route  = {
+    const route = {
       ...req.body.route,
       created_at: new Date(),
       _user_id: res.locals.decodedToken.id,
     };
     const newRoute = await routesController.create(route);
-    return res.status(200).send({msg:"Route created", route: newRoute});
+    return res.status(200).send({ msg: "Route created", route: newRoute });
   } catch (error) {
     if (error instanceof Error) return res.status(500).send(error.message);
     return res.status(500).send("Unknown error");
@@ -30,9 +30,9 @@ router.post("/", async (req: Request, res: Response) => {
 
 router.delete("/", async (req: Request, res: Response) => {
   try {
-    const {id}  = req.body;
+    const { id } = req.body;
     const newRoute = await routesController.delete(id);
-    return res.status(200).send({msg:"Route deleted"});
+    return res.status(200).send({ msg: "Route deleted" });
   } catch (error) {
     if (error instanceof Error) return res.status(500).send(error.message);
     return res.status(500).send("Unknown error");

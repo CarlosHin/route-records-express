@@ -1,5 +1,4 @@
 import express, { Request, Response } from "express";
-import { User } from "./userModel";
 import { userController } from "./userController";
 import bcrypt from "bcrypt";
 
@@ -21,7 +20,7 @@ router.post("/", async (req: Request, res: Response) => {
     const saltRounds = 10;
     const passwordHash = await bcrypt.hash(password, saltRounds);
 
-    await userController.create({ name, username, passwordHash  });
+    await userController.create({ name, username, passwordHash });
     return res.status(200).send(`User ${name} created`);
   } catch (error) {
     if (error instanceof Error) return res.status(500).send(error.message);

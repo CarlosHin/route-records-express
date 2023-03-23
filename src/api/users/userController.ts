@@ -1,10 +1,18 @@
-import { User } from "./userModel";
+import { User } from "../../models/userModel";
 
 export const userController = {
-  async create({ username, name, passwordHash }: { username: string; name: string; passwordHash:string;}) {
+  async create({
+    username,
+    name,
+    passwordHash,
+  }: {
+    username: string;
+    name: string;
+    passwordHash: string;
+  }) {
     try {
-      const findUser = await User.find({username:username});
-      if(findUser)  throw new Error(`Username ${username} Already exist`);
+      const findUser = await User.find({ username: username });
+      if (findUser) throw new Error(`Username ${username} Already exist`);
 
       const user = User.build({ username, name, passwordHash });
       await user.save();
